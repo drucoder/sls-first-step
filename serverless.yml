@@ -1,0 +1,54 @@
+service: sls-first-step
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: java8
+  lambdaHashingVersion: 20201221
+
+# you can overwrite defaults here
+#  stage: dev
+  region: eu-central-1
+
+# you can define service wide environment variables here
+#  environment:
+#    variable1: value1
+
+# you can add packaging information here
+package:
+  artifact: target/hello-dev.jar
+
+functions:
+  myFirstLambda:
+    handler: com.serverless.Handler
+    events:
+      - httpApi:
+          path: /first
+          method: get
+      - httpApi:
+          path: /first
+          method: post
+  mySecondLambda:
+    handler: com.serverless.HandlerSecond
+    events:
+      - httpApi:
+          path: /second
+          method: get
+
+
+#    Define function environment variables here
+#    environment:
+#      variable2: value2
+
+# you can add CloudFormation resource templates here
+#resources:
+#  Resources:
+#    NewResource:
+#      Type: AWS::S3::Bucket
+#      Properties:
+#        BucketName: my-new-bucket
+#  Outputs:
+#     NewOutput:
+#       Description: "Description for the output"
+#       Value: "Some output value"
